@@ -19,6 +19,6 @@ userSchema.pre("save", async function(next){
 }); 
 
 // Create the model "User" using userSchema and assign it to the User variable
-const User = mongoose.model<UserType>("User", userSchema);
+const User = mongoose.model("User", userSchema);
 
 export default User
