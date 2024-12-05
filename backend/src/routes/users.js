@@ -1,12 +1,25 @@
 import express from 'express';
 import User from '../models/user.js';
+import { check, validationResult } from "express-validator";
 import jwt from "jsonwebtoken";
 
 // Create a router instance
 const router = express.Router();
 
 // Registration route /api/users/register
-router.post("/register", async(req,res) => {
+router.post("/register", [
+    // Express validator
+    check("firstName", "First name is required").isString(),
+    check("lastName", "Last name is required").isString(),
+    check("email", "Email is required").isEmail(),
+    check("password", "Password must be a minimum of 6 characters").isLength({
+        min:6,
+    }),
+],async(req,res) => {
+    const errors = validationResult(req); 
+    if(!errors.isEmpty()){
+        return res.status(400).json({message: errors.array()});
+    }
     try {
         // Checks if user's email is already in database
         let user = await User.findOne({
