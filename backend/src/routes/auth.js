@@ -1,9 +1,10 @@
 import express from 'express';
 import { check, validationResult } from "express-validator";
-import User from '../models/user';
+import User from '../models/user.js';
 import bcrypt from "bcryptjs"
 import jwt from 'jsonwebtoken'
 
+// Create a router instance
 const router = express.Router();
 
 router.post("/login", [ 
@@ -36,7 +37,7 @@ router.post("/login", [
             { expiresIn: "1d"}
         );
 
-        res_cookie("auth_token", token, {
+        res.cookie("auth_token", token, {
             httpOnly: true,
             secure: process.env.NODE_ENV === "production",
             maxAge: 86400000,
@@ -47,3 +48,5 @@ router.post("/login", [
         res.status(500).json({ message: "Something went wrong"})
     }
 });
+
+export default router;
