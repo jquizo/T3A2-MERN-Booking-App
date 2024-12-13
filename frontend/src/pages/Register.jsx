@@ -1,16 +1,10 @@
 import { useForm } from 'react-hook-form';
-import { useMutation } from 'react-query';
-import * as apiClient from '../api-client.js';
 import { useAppContext } from '../contexts/AppContext.jsx';
 
 const Register = () => {
-    const { showToast } = useAppContext
 
-    const { register, watch, handleSubmit, formState: {errors}, } = useForm()
+    const { register, watch, handleSubmit } = useForm()
 
-    const onSubmit = handleSubmit((data) => {
-        console.log(data);
-    });
 
     return (
         <form className="flex flex-col gap-4">
