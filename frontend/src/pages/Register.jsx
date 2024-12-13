@@ -1,22 +1,24 @@
 import { useForm } from 'react-hook-form';
 import { useMutation } from 'react-query';
 import * as apiClient from '../api-client.js';
+import { useAppContext } from '../contexts/AppContext.jsx';
 
 const Register = () => {
+    const { showToast } = useAppContext
 
     const { register, watch, handleSubmit, formState: {errors}, } = useForm()
 
     const mutation = useMutation(apiClient.register, {
         onSuccess: () => {
-            console.log("Registration complete");
+            showToast({message: "Registration Success"})
         },
         onError: (error) => {
-            console.log(error.message)
+            showToast({message:error.message})
         },
     });
 
     const onSubmit = handleSubmit((data) => {
-        console.log(data);
+        mutation.mutate(data)
     });
 
     return (
