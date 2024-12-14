@@ -5,7 +5,7 @@ import * as apiClient from '../api-client.js';
 
 const Register = () => {
 
-    const { register, watch, handleSubmit } = useForm()
+    const { register, watch, handleSubmit } = useForm('')
 
     const mutation = useMutation(apiClient.register, {
         onSuccess:  () => {
@@ -18,7 +18,7 @@ const Register = () => {
 
     const onSubmit = handleSubmit((data) =>     {
         mutation.mutate(data);
-    })
+    });
 
     
     return (
