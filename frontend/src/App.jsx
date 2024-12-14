@@ -5,8 +5,8 @@ import {
   Routes,
   Navigate,
 } from "react-router-dom";
-import Layout from './layouts/Layout';
-import Register from './pages/Register.jsx';
+import Layout from './layouts/Layout.jsx';
+import Register from './pages/Register.tsx';
 
 function App() {
   return (

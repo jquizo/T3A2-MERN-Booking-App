@@ -5,7 +5,15 @@ import * as apiClient from '../api-client.js';
 
 const Register = () => {
 
-    const { register, watch, handleSubmit } = useForm('')
+     type RegisterFormData = {
+    firstName: string;
+    lastName: string;
+    email: string;
+    password: string;
+    confirmPassword: string;
+    };
+
+    const { register, watch, handleSubmit } = useForm<RegisterFormData>()
 
     const mutation = useMutation(apiClient.register, {
         onSuccess:  () => {
